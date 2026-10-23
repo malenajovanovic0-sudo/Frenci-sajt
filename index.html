@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Frenči — slatki i slani mini kroasani, kroasan sendviči i kafa. Makedonska 24, Beograd.">
+<title>Frenči — kroasančići i kafica</title>
+<meta name="color-scheme" content="only light">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Slabo+13px&display=swap">
+<style>
+/* Mobile-first; desktop layout from 900px. Brand locked: Frenči green + cream */
+@font-face{font-family:"Cabinet";src:url("CabinetGrotesk-Variable.ttf") format("truetype");font-weight:100 900;font-display:swap}
+:root{
+  --cream:#FBF9DA; --green:#3C6B44; --line:rgba(60,107,68,.25); --grey:#CBCCD0;
+  --display:"Cabinet","Helvetica Neue",Arial,sans-serif;
+  --body:"Slabo 13px",Georgia,serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  color-scheme:only light;
+}
+*{box-sizing:border-box}
+html,body{background:var(--cream)}
+body{margin:0;color:var(--green);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.app{max-width:440px;margin:0 auto;background:var(--cream);padding-top:51px}
+a{color:inherit}
+img{display:block;max-width:100%;height:auto}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:34px;line-height:1.08}
+h2{font-size:28px;line-height:1.12}
+h3{font-size:20px;line-height:1.2}
+p{margin:0}
+.cap{font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.pad{padding-inline:20px}
+section{padding-block:48px}
+.stack{display:flex;flex-direction:column;gap:14px}
+.dark{background:var(--green);color:var(--cream)}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+
+/* header */
+header{position:fixed;top:0;left:0;right:0;z-index:20;background:var(--cream);border-bottom:1px solid var(--line);transition:box-shadow .3s}
+header.scrolled{box-shadow:0 6px 18px rgba(60,107,68,.08)}
+header .in{max-width:440px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:12px 20px}
+header .logo img{height:26px;width:auto}
+.topnav{display:none}
+.menu-btn{font:inherit;font-size:15px;background:none;border:0;color:var(--green);padding:8px 0;cursor:pointer}
+nav.drawer{position:fixed;inset:0;z-index:30;background:var(--green);color:var(--cream);display:flex;flex-direction:column;justify-content:center;gap:22px;padding:40px 32px;clip-path:circle(0% at calc(100% - 40px) 30px);transition:clip-path .55s var(--ease);visibility:hidden}
+nav.drawer.open{clip-path:circle(150% at calc(100% - 40px) 30px);visibility:visible}
+nav.drawer a{font-family:var(--display);font-size:38px;text-decoration:none;transform:translateY(16px);opacity:0;transition:transform .5s var(--ease),opacity .5s}
+nav.drawer.open a{transform:none;opacity:1}
+nav.drawer .close{position:absolute;top:16px;right:20px;font:inherit;background:none;border:0;color:var(--cream);font-size:15px;cursor:pointer}
+nav.drawer .meta{font-size:14px;opacity:.85;margin-top:24px;line-height:1.7}
+
+/* buttons, rows */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;background:var(--green);color:var(--cream);text-decoration:none;border-radius:2px;font-size:15px;border:1px solid var(--green);transition:transform .2s,background .2s,color .2s}
+.btn:active{transform:scale(.97)}
+.btn.out{background:none;color:var(--green)}
+.btn.light{background:var(--cream);color:var(--green);border-color:var(--cream)}
+.btn.ghost{background:none;color:var(--cream);border-color:var(--cream)}
+.link{text-decoration:underline;text-underline-offset:3px;font-size:15px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:13px 0;border-bottom:1px solid var(--line)}
+.row .n{font-family:var(--display);font-size:18px}
+.row .p{font-size:15px;font-variant-numeric:tabular-nums}
+.sub{font-size:15px;opacity:.9;margin-bottom:6px}
+
+/* frames */
+.arch{border:1px solid var(--green);border-radius:999px 999px 0 0;padding:6px}
+.arch>.in{border:2px solid var(--green);border-radius:999px 999px 0 0;overflow:hidden;background:var(--grey);position:relative}
+.arch>.in>img{width:100%;aspect-ratio:var(--ar,4/5);object-fit:cover}
+.arch.logo>.in{padding-top:96px}
+.arch.logo>.in>img{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 70px);mask-image:linear-gradient(to bottom,transparent 0,#000 70px);margin-top:-40px}
+.arch.logo>.in::before{content:"";position:absolute;top:40px;left:50%;width:130px;height:44px;transform:translateX(-50%);background:url("frenci-logo.svg") center/contain no-repeat}
+.ram{border:1px solid var(--green);padding:6px}
+.ram>img{border:2px solid var(--green);width:100%;object-fit:cover}
+.tex{padding:16px;border-radius:4px;background-size:cover;background-position:center}
+.tex>img{width:100%;aspect-ratio:6/5;object-fit:cover;border-radius:2px}
+.dot{width:36px;height:36px;border-radius:50%;object-fit:cover;flex:none}
+
+/* home */
+.ukusi{display:flex;flex-direction:column;gap:28px}
+.ukus{display:flex;flex-direction:column;gap:12px}
+.ukus .meta{display:flex;gap:12px;align-items:center}
+.lokal{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:end}
+.lokal .ram{grid-column:1/-1}
+.lokal .ram img{aspect-ratio:3/2}
+.hours{display:grid;grid-template-columns:auto 1fr;gap:2px 16px}
+
+/* menu */
+.tabs{position:sticky;top:51px;z-index:10;display:flex;gap:8px;overflow-x:auto;padding:12px 20px;background:var(--cream);border-block:1px solid var(--line);scrollbar-width:none}
+.tabs a{flex:none;padding:8px 14px;border:1px solid var(--green);border-radius:20px;font-size:13px;text-decoration:none;transition:background .25s,color .25s}
+.tabs a.on{background:var(--green);color:var(--cream)}
+.cat{scroll-margin-top:120px}
+.cat .head{margin:24px 0 4px}
+.biglist{display:flex;flex-direction:column;gap:22px}
+.big{display:grid;grid-template-columns:104px 1fr;gap:14px;align-items:center}
+.big img{width:104px;height:104px;object-fit:cover;border-radius:2px}
+.big .top{display:flex;justify-content:space-between;gap:10px}
+.big .top b{font-family:var(--display);font-weight:400;font-size:20px}
+.big small{display:block;font-size:13px;opacity:.9;margin-top:4px;line-height:1.4}
+.note{font-size:14px;opacity:.85}
+
+/* ketering */
+.who{display:flex;gap:16px;align-items:center;padding-block:14px;border-top:1px solid var(--line)}
+.who img{width:78px;flex:none}
+.steps{display:flex;flex-direction:column;gap:20px}
+.step{display:flex;gap:16px}
+.step i{flex:none;width:44px;height:44px;border-radius:50%;background:var(--green);color:var(--cream);display:grid;place-items:center;font-style:normal;font-family:var(--display);font-size:18px}
+.step h3{margin-bottom:4px}
+.cards{display:flex;flex-direction:column;gap:14px}
+.card{padding:22px;border:1px solid var(--green);border-radius:2px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.card .btn{margin-top:8px}
+
+/* kontakt */
+.info{display:grid;gap:18px}
+.info dt{font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+.info dd{margin:0;font-family:var(--display);font-size:20px;line-height:1.35}
+
+footer{background:var(--green);color:var(--cream)}
+footer .in{padding:32px 20px;display:flex;flex-direction:column;gap:8px}
+footer .f{font-family:var(--display);font-size:22px}
+footer nav{display:flex;gap:16px;font-size:15px}
+
+/* hero stays put; the page slides over it */
+.hero-lock{position:sticky;top:51px;width:100%;z-index:0}
+#v-pocetna>section,#v-pocetna~footer{position:relative;z-index:1;background:var(--cream)}
+#v-pocetna>section.dark{background:var(--green)}
+.view{display:none}
+.view.on{display:block;animation:pageIn .45s cubic-bezier(.165,.84,.44,1)}
+@keyframes pageIn{from{opacity:0}to{opacity:1}}
+.rv{transition:opacity .9s cubic-bezier(.165,.84,.44,1),transform .9s cubic-bezier(.165,.84,.44,1)}
+.rv.wait{opacity:0;transform:translateY(14px)}
+.rv-img img{transition:transform 1.6s cubic-bezier(.165,.84,.44,1)}
+.rv-img.wait img{transform:scale(1.08)}
+.row.rv,.big.rv{transition-duration:.6s}
+.row.rv.wait{transform:translateY(8px)}
+@media (prefers-reduced-motion:reduce){.view.on{animation:none}.rv,.rv-img img{transition:none}.rv.wait{opacity:1;transform:none}.rv-img.wait img{transform:none}nav.drawer,nav.drawer a{transition:none}}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+
+
+/* spacing system: one rhythm everywhere */
+section{padding-block:56px}
+section:not(.dark)+section:not(.dark),.tabs+section{padding-top:0}
+.view>section:first-child,.view>picture+section{padding-top:40px}
+picture{display:contents}
+.intro-sec{border-top:1px solid var(--line)}
+.intro{display:flex;flex-direction:column;gap:18px}
+.light-ram{border-color:var(--cream)}.light-ram>img{border-color:var(--cream)}
+.dark .split{gap:32px}
+.who img{width:96px;height:56px;object-fit:contain;object-position:left center}
+/* ============ DESKTOP ============ */
+@media (min-width:900px){
+  body{font-size:17px}
+  .app{max-width:none;padding-top:69px}
+  header .in{max-width:1240px;padding:16px 48px}
+  header .logo img{height:34px}
+  .menu-btn{display:none}
+  .topnav{display:flex;align-items:center;gap:32px;font-size:16px}
+  .topnav a{text-decoration:none;padding:6px 0;border-bottom:1px solid transparent;transition:border-color .2s}
+  .topnav a:hover,.topnav a.on{border-bottom-color:var(--green)}
+  .topnav .btn{min-height:42px;padding:0 20px;border-bottom:1px solid var(--green)}
+  .topnav .btn:hover{background:none;color:var(--green)}
+  .tabs{top:69px;justify-content:center;padding:14px 48px}
+  .tabs a{font-size:14px;padding:9px 18px}
+  .wrap{max-width:1240px;margin:0 auto;padding-inline:48px}
+  .pad:not(.wrap){padding-inline:0}
+  section{padding-block:96px}
+  .view>section:first-child,.view>picture+section{padding-top:72px}
+  .intro{display:grid;grid-template-columns:1.2fr 1fr;gap:72px;align-items:start}
+  .intro .stack{padding-top:14px}
+  .who img{width:120px;height:70px}
+  h1{font-size:64px;line-height:1.02}
+  h2{font-size:44px;line-height:1.06}
+  h3{font-size:24px}
+  .cap{font-size:12px}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+  .split.rev>:first-child{order:2}
+  .split .stack{max-width:520px}
+  .hero-lock{top:69px;width:100%;height:auto}
+  .intro h1{font-size:72px}
+  .ukusi{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+  .center{text-align:center;align-items:center;margin-inline:auto;max-width:720px}
+  .lokal .ram img{aspect-ratio:16/10}
+  /* menu */
+  .cat .split{align-items:start}
+  .cat .split>.arch{position:sticky;top:150px}
+  .cat .head{margin-top:0}
+  .biglist{display:grid;grid-template-columns:1fr 1fr;gap:40px 56px}
+  .big{grid-template-columns:140px 1fr;gap:20px}
+  .big img{width:140px;height:140px}
+  .drinks{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+  /* ketering */
+  .whos{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+  .who{flex-direction:column;align-items:flex-start;border-top:1px solid var(--green);padding-top:24px}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+  .step{flex-direction:column}
+  .step i{width:56px;height:56px;font-size:22px}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .card{padding:36px}
+  .info{grid-template-columns:1fr 1fr;gap:32px}
+  .info dd{font-size:26px}
+  footer .in{max-width:1240px;margin:0 auto;padding:48px;display:grid;grid-template-columns:1fr auto;align-items:end;gap:10px 40px}
+  footer nav{grid-column:2;grid-row:1/3;align-self:center;gap:28px}
+}
+</style>
+</head>
+<body>
+
+<header id="hdr"><div class="in">
+  <a class="logo" href="#pocetna" aria-label="Frenči početna"><img src="frenci-logo.svg" alt="Frenči"></a>
+  <nav class="topnav" aria-label="Glavni meni">
+    <a href="#pocetna" data-v="pocetna">Početna</a>
+    <a href="#meni" data-v="meni">Meni</a>
+    <a href="#ketering" data-v="ketering">Ketering i dostava</a>
+    <a href="#kontakt" data-v="kontakt">Kontakt</a>
+    <a class="btn" href="tel:+38162242422">Pozovi nas</a>
+  </nav>
+  <button class="menu-btn" id="openNav" aria-expanded="false">Meni ☰</button>
+</div></header>
+<nav class="drawer" id="drawer" aria-label="Meni">
+  <button class="close" id="closeNav">Zatvori ✕</button>
+  <a href="#pocetna">Početna</a>
+  <a href="#meni">Meni</a>
+  <a href="#ketering">Ketering i dostava</a>
+  <a href="#kontakt">Kontakt</a>
+  <div class="meta">Makedonska 24, Beograd<br><a href="tel:+38162242422" style="font:inherit;opacity:1;transform:none">Pozovi nas: 062 24 24 22</a></div>
+</nav>
+
+<div class="app">
+<!-- POČETNA -->
+<main class="view" id="v-pocetna">
+  <picture><source media="(min-width:900px)" srcset="img/ulica-desktop.jpg"><img class="hero-lock" src="img/ulica.jpg" alt="Ilustracija izloga Frenčija i jazavičar sa koferom"></picture>
+  <section class="intro-sec"><div class="wrap pad intro">
+    <h1 class="rv">Kroasančići, kafica i Frenči.</h1>
+    <div class="stack">
+      <p class="rv">Slatki i slani mini kroasani, kroasan sendviči i kafa. Pronađi nas u Makedonskoj 24 ili poruči za dostavu.</p>
+      <div class="btns rv"><a class="btn" href="#meni">Pogledaj meni →</a><a class="btn out" href="#ketering">Ketering i dostava →</a></div>
+    </div>
+  </div></section>
+  <section><div class="wrap pad split">
+    <div class="arch rv rv-img"><div class="in"><img src="o/zvono.jpg" alt="Kroasani pod staklenim zvonom" style="--ar:330/450"></div></div>
+    <div class="stack">
+      <h2 class="rv">Slatki ili slani?</h2>
+      <p class="rv">Od pistaća i maline do pršute i krem sira. Izaberi nekoliko mini kroasana, dodaj kafu i doručak je tu.</p>
+      <a class="link rv" href="#meni">Pogledaj sve ukuse →</a>
+    </div>
+  </div></section>
+  <section><div class="wrap pad stack" style="gap:28px">
+    <h2 class="rv">Šta ćeš prvo da probaš?</h2>
+    <div class="ukusi">
+      <div class="ukus rv"><div class="tex" style="background-image:url(o/tex_pm.jpg)"><img src="o/ukus_pm.jpg" alt="Pistać malina"></div><div class="meta"><img class="dot" src="o/tex_pm.jpg" alt=""><div><h3>Pistać malina</h3><p style="font-size:15px">Pistać i malina u slatkom mini kroasanu.</p></div></div></div>
+      <div class="ukus rv"><div class="tex" style="background-image:url(o/tex_losos.jpg)"><img src="o/ukus_losos.jpg" alt="Dimljeni losos Mascarpone"></div><div class="meta"><img class="dot" src="o/tex_losos.jpg" alt=""><div><h3>Dimljeni losos Mascarpone</h3><p style="font-size:15px">Dimljeni losos uz kremasti mascarpone.</p></div></div></div>
+      <div class="ukus rv"><div class="tex" style="background-image:url(o/tex_prsuta.jpg)"><img src="o/ukus_prsuta.jpg" alt="Pršuta Philadelphia"></div><div class="meta"><img class="dot" src="o/tex_prsuta.jpg" alt=""><div><h3>Pršuta Philadelphia</h3><p style="font-size:15px">Mini kroasan sa pršutom i Philadelphia krem sirom.</p></div></div></div>
+    </div>
+  </div></section>
+  <section><div class="wrap pad split rev">
+    <figure class="rv" style="margin:0"><img src="o/razglednica.png" alt="Razglednica Istanbul sa markicom"><figcaption class="cap" style="margin-top:12px">Istanbul · Pistać sa komadićima</figcaption></figure>
+    <div class="stack">
+      <span class="cap rv">Frenčijeva putovanja</span>
+      <h2 class="rv">Ukusi sa Frenčijevih putovanja.</h2>
+      <p class="rv">Istražujemo nove kombinacije i donosimo ih u naš meni. Ovde upoznaj ukuse inspirisane Frenčijevim putovanjima.</p>
+    </div>
+  </div></section>
+  <section><div class="wrap pad split">
+    <div class="arch rv rv-img"><div class="in"><img src="o/kutije.jpg" alt="Zelene Frenči kutije" style="--ar:330/420"></div></div>
+    <div class="stack">
+      <h2 class="rv">Frenči za tvoje okupljanje.</h2>
+      <p class="rv">Mini kroasani za rođendane, sastanke i druženja. Biraj slatke, slane ili mešano, a mi ćemo ih spakovati za posluženje.</p>
+      <a class="btn rv" href="#ketering" style="align-self:flex-start">Pogledaj ketering →</a>
+    </div>
+  </div></section>
+  <section class="dark"><div class="wrap pad split">
+    <div class="ram light-ram rv rv-img"><img src="o/dostava.jpg" alt="Kutija sa kroasanima i čašama" style="aspect-ratio:390/429"></div>
+    <div class="stack">
+      <img class="rv" src="o/poza_dog2.png" alt="" style="width:130px;filter:brightness(0) invert(96%) sepia(12%)">
+      <h2 class="rv">Kroasani i kafa na tvojoj adresi.</h2>
+      <p class="rv">Poruči preko Wolta. Za veće porudžbine i ketering, javi nam se da dogovorimo našu dostavu.</p>
+      <div class="btns rv"><a class="btn light" href="https://wolt.com" target="_blank" rel="noopener">Naruči na Woltu →</a><a class="btn ghost" href="tel:+38162242422">Pozovi nas →</a></div>
+    </div>
+  </div></section>
+  <section><div class="wrap pad split">
+    <div class="lokal">
+      <div class="ram rv rv-img"><img src="o/lokal.jpg" alt="Police u lokalu"></div>
+      <div class="arch rv rv-img"><div class="in"><img src="o/izlog.jpg" alt="Izlog sa balonima" style="--ar:170/230"></div></div>
+      <div class="arch rv rv-img"><div class="in"><img src="o/case.jpg" alt="Frenči čaše" style="--ar:170/230"></div></div>
+    </div>
+    <div class="stack">
+      <h2 class="rv">Vidimo se u Makedonskoj 24.</h2>
+      <p class="rv">Svrati na kroasan i kafu ili ponesi svoje omiljene ukuse.</p>
+      <p class="rv">Makedonska 24, Beograd</p>
+      <div class="hours rv"><span>Pon–pet:</span><span>8–21 h</span><span>Subota:</span><span>8–18 h</span><span>Nedelja:</span><span>8–16 h</span></div>
+      <p class="rv"><a href="tel:+38162242422">062 24 24 22</a><br>Instagram: <a href="https://instagram.com/frenci.rs" target="_blank" rel="noopener">@frenci.rs</a></p>
+      <a class="btn rv" href="https://www.google.com/maps/search/?api=1&query=Makedonska+24+Beograd" target="_blank" rel="noopener" style="align-self:flex-start">Kako do nas →</a>
+    </div>
+  </div></section>
+</main>
+
+<!-- MENI -->
+<main class="view" id="v-meni">
+  <section><div class="wrap pad stack center">
+    <span class="cap">Meni</span>
+    <h1>Šta ti se danas jede?</h1>
+    <p>Mini kroasani za slatko i slano, veći kroasani za doručak i kafa uz sve to.</p>
+  </div></section>
+  <div class="tabs" id="tabs">
+    <a href="#meni" data-t="c-slatki" class="on">Slatki</a>
+    <a href="#meni" data-t="c-slani">Slani</a>
+    <a href="#meni" data-t="c-veliki">Kroasani i sendviči</a>
+    <a href="#meni" data-t="c-kafa">Kafa i pića</a>
+  </div>
+  <section class="cat" id="c-slatki"><div class="wrap pad split">
+    <div class="arch logo rv rv-img"><div class="in"><img src="o/slatki.jpg" alt="Slatki mini kroasani"></div></div>
+    <div><h2 class="rv head">Slatki mini kroasani</h2><p class="sub rv">Izaberi omiljeni ukus ili probaj nekoliko različitih.</p><div id="l-slatki"></div></div>
+  </div></section>
+  <section class="cat" id="c-slani"><div class="wrap pad split rev">
+    <div class="arch logo rv rv-img"><div class="in"><img src="o/slani.jpg" alt="Slani mini kroasani"></div></div>
+    <div><h2 class="rv head">Slani mini kroasani</h2><p class="sub rv">Sa sirom, pršutom, povrćem ili malo ljutine.</p><div id="l-slani"></div></div>
+  </div></section>
+  <section class="cat dark" id="c-veliki"><div class="wrap pad stack" style="gap:22px">
+    <span class="cap rv">Kroasani i sendviči</span>
+    <h2 class="rv">Puter kroasani u većem izdanju.</h2>
+    <div id="l-veliki" class="biglist"></div>
+  </div></section>
+  <section class="cat" id="c-kafa"><div class="wrap pad">
+    <div class="split" style="align-items:start">
+      <div class="arch logo rv rv-img"><div class="in"><img src="o/pica.jpg" alt="Frenči kafa i ledeni napici"></div></div>
+      <div class="drinks">
+        <div><h2 class="rv head">Kafa i latte napici</h2><div id="l-kafa"></div></div>
+        <div><h2 class="rv head">Ostala pića</h2><div id="l-pica"></div></div>
+      </div>
+    </div>
+    <p class="note rv" style="margin-top:28px">Sve cene su u dinarima. Cene kroasana su po komadu.</p>
+  </div></section>
+  <section class="dark"><div class="wrap pad stack center">
+    <h2 class="rv">Poručuješ za više ljudi?</h2>
+    <p class="rv">Složićemo kutiju mini kroasana prema tvom izboru. Javi nam za koju priliku poručuješ i koliko vas je.</p>
+    <a class="btn light rv" href="#ketering">Dogovori porudžbinu →</a>
+  </div></section>
+</main>
+
+<!-- KETERING -->
+<main class="view" id="v-ketering">
+  <section><div class="wrap pad split">
+    <div class="arch rv rv-img"><div class="in"><img src="o/kutije.jpg" alt="Zelene Frenči kutije" style="--ar:330/475"></div></div>
+    <div class="stack">
+      <span class="cap rv">Ketering i dostava</span>
+      <h1 class="rv">Kroasančići za celo društvo.</h1>
+      <p class="rv">Za doručak u kancelariji, rođendan ili druženje kod kuće. Izaberi slatke i slane mini kroasane, a mi ćemo pomoći oko količine i kombinacije ukusa.</p>
+      <div class="btns rv"><a class="btn" href="tel:+38162242422">Pozovi za porudžbinu →</a><a class="btn out" href="https://instagram.com/frenci.rs" target="_blank" rel="noopener">Piši nam na Instagramu →</a></div>
+    </div>
+  </div></section>
+  <section><div class="wrap pad stack" style="gap:18px">
+    <h2 class="rv">Za kancelariju, proslave i poklone.</h2>
+    <div class="whos">
+      <div class="who rv"><img src="img/poza1.svg" alt=""><div><h3>Doručak u kancelariji</h3><p>Mini kroasani za zajednički doručak, pauzu uz kafu ili posluženje na sastanku.</p></div></div>
+      <div class="who rv"><img src="img/poza2.svg" alt=""><div><h3>Rođendani i druženja</h3><p>Slatki i slani ukusi koje možeš da kombinuješ prema svom društvu.</p></div></div>
+      <div class="who rv"><img src="img/poza3.svg" alt=""><div><h3>Kutija na poklon</h3><p>Izaberi kroasane za nekoga čije omiljene ukuse već znaš.</p></div></div>
+    </div>
+  </div></section>
+  <section><div class="wrap pad stack" style="gap:28px">
+    <h2 class="rv">Kako da poručiš?</h2>
+    <div class="steps">
+      <div class="step rv"><i>1</i><div><h3>Javi nam kada i za koliko ljudi.</h3><p>Pozovi nas ili piši na Instagramu. Reci nam datum, broj ljudi i da li želiš preuzimanje ili dostavu.</p></div></div>
+      <div class="step rv"><i>2</i><div><h3>Izaberi ukuse.</h3><p>Slatki, slani ili mešano. Ako nisi siguran koliko da poručiš, pomoći ćemo ti oko količine.</p></div></div>
+      <div class="step rv"><i>3</i><div><h3>Dogovorimo preuzimanje ili dostavu.</h3><p>Porudžbinu možeš preuzeti u Makedonskoj 24 ili s nama dogovoriti dostavu na adresu.</p></div></div>
+    </div>
+    <div class="ram rv rv-img"><img src="o/pakovanje.jpg" alt="Pakovanje kutije" style="aspect-ratio:334/244;max-height:520px"></div>
+  </div></section>
+  <section><div class="wrap pad stack" style="gap:22px">
+    <h2 class="rv">Želiš da poručiš za danas?</h2>
+    <div class="cards">
+      <div class="card rv"><h3>Poruči preko Wolta.</h3><p>Pogledaj dostupne kroasane i napitke i naruči na svoju adresu.</p><a class="btn" href="https://wolt.com" target="_blank" rel="noopener">Otvori Wolt →</a></div>
+      <div class="card rv"><h3>Za veće porudžbine, javi nam se direktno.</h3><p>Količinu, vreme i mogućnost naše dostave dogovaramo prilikom poručivanja.</p><a class="btn out" href="tel:+38162242422">Pozovi 062 24 24 22 →</a></div>
+    </div>
+  </div></section>
+  <section class="dark"><div class="wrap pad stack center">
+    <img class="rv" src="img/poza_cta.svg" alt="" style="width:110px">
+    <h2 class="rv">Da dogovorimo posluženje?</h2>
+    <p class="rv">Pošalji nam datum i broj ljudi. Zajedno ćemo izabrati kroasane za tvoje okupljanje.</p>
+    <div class="btns rv" style="justify-content:center"><a class="btn light" href="tel:+38162242422">Pozovi nas →</a><a class="btn ghost" href="https://instagram.com/frenci.rs" target="_blank" rel="noopener">Piši na Instagramu →</a></div>
+  </div></section>
+</main>
+
+<!-- KONTAKT -->
+<main class="view" id="v-kontakt">
+  <section><div class="wrap pad split">
+    <div class="stack" style="gap:28px">
+      <div class="stack">
+        <span class="cap rv">Kontakt</span>
+        <h1 class="rv">Svrati ili nam se javi.</h1>
+        <p class="rv">Za porudžbine i pitanja, pozovi nas ili piši na Instagramu. Za kroasan i kafu, čekamo te u Makedonskoj.</p>
+      </div>
+      <dl class="info rv" style="margin:0">
+        <div><dt>Adresa</dt><dd>Makedonska 24, Beograd</dd></div>
+        <div><dt>Radno vreme</dt><dd>Pon–pet: 8–21 h<br>Subota: 8–18 h<br>Nedelja: 8–16 h</dd></div>
+        <div><dt>Telefon</dt><dd><a href="tel:+38162242422">062 24 24 22</a></dd></div>
+        <div><dt>Instagram</dt><dd><a href="https://instagram.com/frenci.rs" target="_blank" rel="noopener">@frenci.rs</a></dd></div>
+      </dl>
+      <div class="btns rv"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Makedonska+24+Beograd" target="_blank" rel="noopener">Kako do nas →</a><a class="btn out" href="tel:+38162242422">Pozovi nas →</a></div>
+    </div>
+    <div class="arch rv rv-img"><div class="in"><img src="o/izlog.jpg" alt="Izlog Frenčija u Makedonskoj 24" style="--ar:330/440"></div></div>
+  </div></section>
+</main>
+
+<footer><div class="in">
+  <span class="f">Frenči — kroasančići i kafica.</span>
+  <span>Makedonska 24, Beograd</span>
+  <nav><a href="https://instagram.com/frenci.rs" target="_blank" rel="noopener">Instagram</a><a href="#kontakt">Kontakt</a><a href="#meni">Meni</a></nav>
+  <span class="cap">© Frenči 2026</span>
+</div></footer>
+</div>
+
+<script>
+const M={
+ slatki:[["Nutella",100],["Kinder Bueno",100],["Kajsija",100],["Pistać sa komadićima",120],["Pistać malina",120],["Bela čokolada borovnica",120],["Slana karamela",100],["Cheesecake narandža",120],["Raffaello",100],["Vanila jagoda",100]],
+ slani:[["Pršuta Philadelphia",120],["Šunka Philadelphia",100],["Dimljeni losos Mascarpone",120],["’Nduja Mascarpone",120],["Gorgonzola",100],["Tartufi",100],["Pesto i sušeni paradajz",100],["Cheddar jalapeño",100],["Prazan",70]],
+ veliki:[["Pršuta",320,"Pršuta, Philadelphia, mozzarella fior di latte, rukola","s_prsuta"],["Mortadela",320,"Mortadela, Philadelphia, krema od pistaća, pistaći","s_mortadela"],["Dimljeni losos",320,"Dimljeni losos, mascarpone, avokado, limunov sok","s_losos"],["Brie sir",320,"Brie sir, Dijon senf","s_brie"],["Dubai",260,"","s_dubai"],["Prazan",160,"","s_prazan"]],
+ kafa:[["Espresso",150],["Americano",150],["Macchiato",180],["Dupli espresso",250],["Espresso sa mlekom",220],["Cappuccino",220],["Matcha latte",300],["Ube latte",300]],
+ pica:[["Coca-Cola / Zero, 0,33 l",180],["Fanta / Sprite, 0,33 l",180],["Rosa / gazirana voda, 0,33 l",160],["Limunada, 0,2 l",200],["Ceđena pomorandža, 0,2 l",300],["Hladna / topla čokolada",300],["Čaj, više vrsta",200]]
+};
+const row=([n,p])=>`<div class="row rv"><span class="n">${n}</span><span class="p">${p}</span></div>`;
+for(const k of ["slatki","slani","kafa","pica"]) document.getElementById("l-"+k).innerHTML=M[k].map(row).join("");
+document.getElementById("l-veliki").innerHTML=M.veliki.map(([n,p,d,i])=>`<div class="big rv"><img src="o/${i}.jpg" alt="${n}"><div><div class="top"><b>${n}</b><span>${p}</span></div>${d?`<small>${d}</small>`:""}</div></div>`).join("");
+
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+let queue=[],timer=null;
+function flush(){const el=queue.shift();if(!el){timer=null;return;}el.classList.remove("wait");const step=el.classList.contains("row")||el.classList.contains("big")?55:el.classList.contains("rv-img")?180:110;timer=setTimeout(flush,step);}
+const io=("IntersectionObserver" in window)?new IntersectionObserver(es=>{es.filter(e=>e.isIntersecting).map(e=>e.target).sort((a,b)=>a.compareDocumentPosition(b)&4?-1:1).forEach(t=>{io.unobserve(t);queue.push(t);});if(!timer)flush();},{rootMargin:"0px 0px -10% 0px",threshold:.08}):null;
+function arm(view){ if(!io||reduce) return; queue=[];clearTimeout(timer);timer=null;
+ const els=[...view.querySelectorAll(".rv")]; let k=0;
+ els.forEach(el=>{const r=el.getBoundingClientRect();
+  el.classList.add("wait");
+  if(r.top<innerHeight*0.9){ requestAnimationFrame(()=>setTimeout(()=>el.classList.remove("wait"),80+k++*120)); }
+  else io.observe(el); }); }
+
+const hdr=document.getElementById("hdr");
+addEventListener("scroll",()=>hdr.classList.toggle("scrolled",scrollY>8),{passive:true});
+const drawer=document.getElementById("drawer"),ob=document.getElementById("openNav");
+const setNav=o=>{drawer.classList.toggle("open",o);ob.setAttribute("aria-expanded",o)};
+ob.onclick=()=>setNav(true);document.getElementById("closeNav").onclick=()=>setNav(false);
+const VIEWS=["pocetna","meni","ketering","kontakt"];
+function show(){const h=(location.hash||"#pocetna").slice(1);const v=VIEWS.includes(h)?h:null;
+ if(v){document.querySelectorAll(".view").forEach(e=>e.classList.toggle("on",e.id==="v-"+v));document.querySelectorAll(".topnav a[data-v]").forEach(a=>a.classList.toggle("on",a.dataset.v===v));window.scrollTo(0,0);requestAnimationFrame(()=>arm(document.getElementById("v-"+v)));}
+ else if(!document.querySelector(".view.on")){const p=document.getElementById("v-pocetna");p.classList.add("on");requestAnimationFrame(()=>arm(p));}
+ setNav(false);}
+addEventListener("hashchange",show);show();
+document.querySelectorAll("#tabs a").forEach(a=>a.onclick=e=>{e.preventDefault();document.querySelectorAll("#tabs a").forEach(x=>x.classList.toggle("on",x===a));document.getElementById(a.dataset.t).scrollIntoView({behavior:reduce?"auto":"smooth"});});
+const cats=["c-slatki","c-slani","c-veliki","c-kafa"].map(id=>document.getElementById(id));
+addEventListener("scroll",()=>{if(!document.getElementById("v-meni").classList.contains("on"))return;let cur=cats[0];for(const c of cats)if(c.getBoundingClientRect().top<180)cur=c;document.querySelectorAll("#tabs a").forEach(a=>a.classList.toggle("on",a.dataset.t===cur.id));},{passive:true});
+</script>
+</body>
+</html>
